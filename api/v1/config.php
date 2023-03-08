@@ -8,11 +8,11 @@ define("MAINTENANCE", false);
 
 //MySQL Configuration
 define("MYSQL_HOST", "localhost");
-define("MYSQL_DBNAME", "SoaringTaskBrowser");
+define("MYSQL_DBNAME", "soaringtaskbrowser");
 define("MYSQL_USERNAME", "root");
 define("MYSQL_PASSWORD", "");
 
-//$pdo = new PDO('mysql:host=' .MYSQL_HOST .';dbname=' .MYSQL_DBNAME, MYSQL_USERNAME, MYSQL_PASSWORD);
+$pdo = new PDO('mysql:host=' .MYSQL_HOST .';dbname=' .MYSQL_DBNAME, MYSQL_USERNAME, MYSQL_PASSWORD);
 
 //Authentication Configuration
 
