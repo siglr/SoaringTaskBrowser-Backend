@@ -69,15 +69,15 @@ switch ($endpoint) {
         $statement->execute(array());
         while ($row = $statement->fetch()) {
             $task = array(
-                "id" => $response['id'],
-                "name" => $response['name'],
-                "author" => $response['author'],
-                "length" => $response['length'],
-                "difficulty" => $response['difficulty'],
-                "likes" => $response['likes'],
-                "dislikes" => $response['dislikes'],
-                "description" => $response['description'],
-                "dphx_file" => $response['dphx_file']
+                "id" => $row['id'],
+                "name" => $row['name'],
+                "author" => $row['author'],
+                "length" => $row['length'],
+                "difficulty" => $row['difficulty'],
+                "likes" => $row['likes'],
+                "dislikes" => $row['dislikes'],
+                "description" => $row['description'],
+                "dphx_file" => $row['dphx_file']
             );
             $data_output[$row['id']] = $task;
         }
