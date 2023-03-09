@@ -2,7 +2,10 @@
 Repository for the backend-side of the Soaring Task Browser client
 
 ## Requirements
-- Apache/nginx Webserver
+- Apache Webserver
 - PHP (7.0+)
 - MySQL
 - phpmyadmin (Optional)
+
+## Install
+Clone the Repository
