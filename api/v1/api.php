@@ -82,7 +82,7 @@ switch ($endpoint) {
             $data_output[$row['id']] = $task;
         }
         break;
-    case 'searchTask':
+    case 'searchtask':
         //Check if query is given
         if (!isset($_GET['query'])) {
             $data_output['error'] = "no_query";
