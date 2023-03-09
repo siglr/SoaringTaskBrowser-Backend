@@ -36,10 +36,12 @@ if (!isset($_GET['endpoint'])) {
 $endpoint = strtolower($endpoint);
 $data_output['endpoint'] = $endpoint;
 switch ($endpoint) {
+    //No matching endpoint, return error and exit.
     default:
         $data_output['error'] = "invalid_endpoint";
         sendResponse($data_output);
         exit();
+    //getTask Endpoint
     case 'gettask':
         if (!isset($_GET['id'])) {
             $data_output['error'] = "no_id";
@@ -82,6 +84,7 @@ switch ($endpoint) {
             $data_output[$row['id']] = $task;
         }
         break;
+    //Serach for Task
     case 'searchtask':
         //Check if query is given
         if (!isset($_GET['query'])) {
