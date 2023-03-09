@@ -12,6 +12,17 @@ $json = file_get_contents('php://input');
 // Converts it into a PHP object
 $data = json_decode($json);
 
+//Get Auth-Token From Header (from: https://stackoverflow.com/a/16311684)
+$token = null;
+$headers = apache_request_headers();
+if (isset($headers['Authorization'])) {
+    $matches = array();
+    preg_match('/Token token="(.*)"/', $headers['Authorization'], $matches);
+    if (isset($matches[1])) {
+        $token = $matches[1];
+    }
+}
+
 //Create Response Array
 $data_output = array("version" => VERSION);
 
@@ -23,6 +34,7 @@ if (!isset($_GET['endpoint'])) {
     $endpoint = $_GET['endpoint'];
 }
 $endpoint = strtolower($endpoint);
+$data_output['endpoint'] = $endpoint;
 switch ($endpoint) {
     default:
         $data_output['error'] = "invalid_endpoint";
@@ -36,7 +48,6 @@ switch ($endpoint) {
         } else {
             $id = $_GET['id'];
         }
-        $data_output['endpoint'] = $endpoint;
         $statement = $pdo->prepare("SELECT * FROM tasks WHERE id = ?");
         $statement->execute(array($id));
         $response = $statement->fetch();
