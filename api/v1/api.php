@@ -82,6 +82,37 @@ switch ($endpoint) {
             $data_output[$row['id']] = $task;
         }
         break;
+    case 'searchTask':
+        //Check if query is given
+        if (!isset($_GET['query'])) {
+            $data_output['error'] = "no_query";
+            sendResponse($data_output);
+            exit();
+        } else {
+            $query = $_GET['query'];
+        }
+        //Search Database for Tasks that match the query
+        $statement = $pdo->prepare("SELECT * FROM tasks WHERE concat(name, author, length, description) LIKE :query");
+        $statement->bindValue(':query', '%' . $query . '%');
+        $statement->execute();
+        $results = 0;
+        while ($row = $statement->fetch()) {
+            $task = array(
+                "id" => $row['id'],
+                "name" => $row['name'],
+                "author" => $row['author'],
+                "length" => $row['length'],
+                "difficulty" => $row['difficulty'],
+                "likes" => $row['likes'],
+                "dislikes" => $row['dislikes'],
+                "description" => $row['description'],
+                "dphx_file" => $row['dphx_file']
+            );
+            $data_output[$row['id']] = $task;
+            $results++;
+        }
+        $data_output['results'] = $results;
+        break;
 }
 
 
