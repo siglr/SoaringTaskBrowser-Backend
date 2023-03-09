@@ -53,6 +53,24 @@ switch ($endpoint) {
         );
         $data_output["task"] = $task;
         break;
+    case 'gettasks':
+        $statement = $pdo->prepare("SELECT * FROM tasks");
+        $statement->execute(array());
+        while ($row = $statement->fetch()) {
+            $task = array(
+                "id" => $response['id'],
+                "name" => $response['name'],
+                "author" => $response['author'],
+                "length" => $response['length'],
+                "difficulty" => $response['difficulty'],
+                "likes" => $response['likes'],
+                "dislikes" => $response['dislikes'],
+                "description" => $response['description'],
+                "dphx_file" => $response['dphx_file']
+            );
+            $data_output[$row['id']] = $task;
+        }
+        break;
 }
 
 
